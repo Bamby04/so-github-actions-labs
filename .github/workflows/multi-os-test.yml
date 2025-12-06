@@ -1,0 +1,29 @@
+name: Multi-OS System Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check_system:
+    name: System Check on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Show system information
+        run: |
+          echo "Operating System: ${{ matrix.os }}"
+          echo "User: ${{ runner.name }}"
+          echo "CPU Info:"
+          uname -a || ver
+
+      - name: List current directory
+        run: |
+          echo "Listing files:"
+          ls -la || dir
