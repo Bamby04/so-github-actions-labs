@@ -16,14 +16,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Show system information
+      - name: Show system information (Linux/macOS)
+        if: runner.os != 'Windows'
         run: |
           echo "Operating System: ${{ matrix.os }}"
-          echo "User: ${{ runner.name }}"
+          echo "Runner name: ${{ runner.name }}"
           echo "CPU Info:"
-          uname -a || ver
+          uname -a
 
-      - name: List current directory
+      - name: Show system information (Windows)
+        if: runner.os == 'Windows'
         run: |
-          echo "Listing files:"
-          ls -la || dir
+          echo "Operating System: ${{ matrix.os }}"
+          echo "Runner name: ${{ runner.name }}"
+          echo "CPU Info:"
+          systeminfo
+
+      - name: List current directory (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: ls -la
+
+      - name: List current directory (Windows)
+        if: runner.os == 'Windows'
+        run: dir
