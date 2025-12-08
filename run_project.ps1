@@ -1,6 +1,3 @@
-flask
-pytest
-pytest-cov
 # ==============================================
 # run_project.ps1
 # Script para iniciar Flask y pytest en Windows
@@ -34,3 +31,4 @@ Start-Process powershell -ArgumentList "-NoExit","-Command","python -m flask run
 # Ejecutar tests con cobertura
 Write-Host "Ejecutando pytest con cobertura..."
 python -m pytest --cov=app_web
+
